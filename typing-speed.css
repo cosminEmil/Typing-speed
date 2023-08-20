@@ -1,7 +1,7 @@
 #secondsCounter {
     position: absolute;
     font-size:x-large;
-    left: 52.5%;
+    left: 48%;
     top: 10%;
 }
 
@@ -17,6 +17,6 @@
 #textHolder {
     position: absolute;
     left: 35%;
-    top: 55%;
+    top: 60%;
     width: 500px;
 }
