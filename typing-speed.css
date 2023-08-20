@@ -1,0 +1,22 @@
+#secondsCounter {
+    position: absolute;
+    font-size:x-large;
+    left: 52.5%;
+    top: 10%;
+}
+
+#textBox {
+    position: absolute;
+    left: 35%;
+    top: 30%;
+    height: 150px;
+    width: 500px;
+    text-align:left;
+}
+
+#textHolder {
+    position: absolute;
+    left: 35%;
+    top: 55%;
+    width: 500px;
+}
