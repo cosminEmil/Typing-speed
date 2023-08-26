@@ -10,7 +10,13 @@
   <body>
     <label id="secondsCounter"></label>
     <div id="textBox"></div>
-    <input type="text" id="textHolder">
+    <input type="text" id="textHolder" onkeypress="return getInputLastLetter(event)">
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p id="modalText"></p>
+      </div>
+    </div>
     <script src="typing-speed.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
   </body>
