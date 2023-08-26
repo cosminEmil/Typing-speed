@@ -1,31 +1,38 @@
 let seconds = 60;
 let container = document.getElementById("textBox");
 let secondsCnt = document.getElementById("secondsCounter");
-let txt = "Grey sheets hang in lines inside the chaotically cramped \nlaundry Steam hisses from irons and there is a giant \nthumping sound of a steam hammer coming from a forging and \npressing factory nearby The heavy wet sheets are being scrubbed on steel washboards \nby Chinese children aged seven to eleven There are old \ngrandmothers using the steam irons some with babies asleep \nin slings on their backs An old man lies asleep on an \nironing board Through the steam we hear a dozen urgent \nconversations in the same language ";
+let text = ["Honda ", "Volkswagen ", "BMW ", "Porsche ", "Koenigsegg ", "Pagani Zonda ", "Hyundai ", "Lamborghini "]; 
+let stringIndex = Math.floor(text.length * Math.random());
 let letterPos = 0;
 
-for (let i = 0; i < txt.length; ++i) {
-    let letter = document.createElement("text");
-    letter.innerText = txt[i];
-    container.appendChild(letter);
-}   
+function randomWord(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+}
+
+for (let i = 0; i < 45; ++i) {
+    let word = randomWord(text);
+    for (let j = 0; j < word.length; ++j) {
+        let letter = document.createElement("text");
+        letter.innerHTML = word.charAt(j);
+        container.appendChild(letter);
+    }
+}
 
 let textContainer = container.getElementsByTagName("text");
 
-let getInputLastLetter = setInterval(function() {
-    let textHolder = document.getElementById("textHolder").value;  
-    if (textHolder.length - 1 == letterPos) {
-        if (textHolder[textHolder.length - 1] == textContainer[letterPos].innerHTML) {
-            textContainer[letterPos].style.color = "green";
-        } else {
-            textContainer[letterPos].style.color = "red";
-        }
-        ++letterPos;
+function getInputLastLetter(event) {
+    let keyNum = event.keyCode;
+    let lastLetter = String.fromCharCode(keyNum);
+    if (lastLetter == textContainer[letterPos].innerHTML) {
+        textContainer[letterPos].style.color = "green";
+    } else {
+        textContainer[letterPos].style.color = "red";
     }
-}, 1);  
+    ++letterPos;
+}
 
 let score = setInterval(function() { 
-    if (seconds ==  1) {
+    if (seconds ==  50) {
         let wordsCnt = 0, lettersCnt = 0, correctLetterCnt = 0;
         for (let i = 0; i < textContainer.length; ++i) {
             if (textContainer[i].innerHTML != " " && textContainer[i].innerHTML != "\n") {
@@ -34,16 +41,34 @@ let score = setInterval(function() {
                 }
                 ++lettersCnt;
             } else {
-                if (lettersCnt == correctLetterCnt) {
+                if (lettersCnt == correctLetterCnt && lettersCnt != 0) {
                     ++wordsCnt;
                 }
                 lettersCnt = 0;
                 correctLetterCnt = 0;
             }
         }
-        alert("WORDS COUNTER: " + wordsCnt);
-        window.location.reload();
+        let modalText = document.getElementById("modalText");
+        modalText.textContent = "SCORE: " + wordsCnt;
+        modal.style.display = "block";
+        
     }
     --seconds;
     secondsCnt.innerText = seconds;
 }, 1000);
+
+var modal = document.getElementById("myModal");
+
+var span = document.getElementsByClassName("close")[0];
+
+span.onclick = function() {
+  modal.style.display = "none";
+  window.location.reload();
+}
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+    window.location.reload();
+  }
+}
