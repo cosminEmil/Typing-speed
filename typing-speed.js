@@ -32,7 +32,8 @@ function getInputLastLetter(event) {
 }
 
 let score = setInterval(function() { 
-    if (seconds ==  50) {
+    if (seconds == 1) {
+        seconds = 0;
         let wordsCnt = 0, lettersCnt = 0, correctLetterCnt = 0;
         for (let i = 0; i < textContainer.length; ++i) {
             if (textContainer[i].innerHTML != " " && textContainer[i].innerHTML != "\n") {
@@ -57,9 +58,8 @@ let score = setInterval(function() {
     secondsCnt.innerText = seconds;
 }, 1000);
 
-var modal = document.getElementById("myModal");
-
-var span = document.getElementsByClassName("close")[0];
+let modal = document.getElementById("myModal");
+let span = document.getElementsByClassName("close")[0];
 
 span.onclick = function() {
   modal.style.display = "none";
