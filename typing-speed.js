@@ -31,28 +31,31 @@ function getInputLastLetter(event) {
     ++letterPos;
 }
 
+function checkCorrectWords() {
+    let wordsCnt = 0, lettersCnt = 0, correctLetterCnt = 0;
+    for (let i = 0; i < textContainer.length; ++i) {
+        if (textContainer[i].innerHTML != " " && textContainer[i].innerHTML != "\n") {
+            if (textContainer[i].style.color == "green") {
+               ++correctLetterCnt;
+            }
+            ++lettersCnt;
+        } else {
+            if (lettersCnt == correctLetterCnt && lettersCnt != 0) {
+                ++wordsCnt;
+            }
+            lettersCnt = 0;
+            correctLetterCnt = 0;
+        }
+    }
+    let modalText = document.getElementById("modalText");
+    modalText.textContent = "SCORE: " + wordsCnt;
+    modal.style.display = "block";
+}
+
 let score = setInterval(function() { 
     if (seconds == 1) {
         seconds = 0;
-        let wordsCnt = 0, lettersCnt = 0, correctLetterCnt = 0;
-        for (let i = 0; i < textContainer.length; ++i) {
-            if (textContainer[i].innerHTML != " " && textContainer[i].innerHTML != "\n") {
-                if (textContainer[i].style.color == "green") {
-                    ++correctLetterCnt;
-                }
-                ++lettersCnt;
-            } else {
-                if (lettersCnt == correctLetterCnt && lettersCnt != 0) {
-                    ++wordsCnt;
-                }
-                lettersCnt = 0;
-                correctLetterCnt = 0;
-            }
-        }
-        let modalText = document.getElementById("modalText");
-        modalText.textContent = "SCORE: " + wordsCnt;
-        modal.style.display = "block";
-        
+        checkCorrectWords();
     }
     --seconds;
     secondsCnt.innerText = seconds;
